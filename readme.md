@@ -1,4 +1,4 @@
-# Prometheus dmarc-srg exporter
+# Prometheus dmarc_srg_exporter
 
 This is a Prometheus exporter for [dmarc-srg](https://github.com/liuch/dmarc-srg) that fetches data from the apps' database and exposes the message counters via prometheus metrics.
 
@@ -40,7 +40,15 @@ sum(increase(dmarc_srg_reports_total{record_spf_align="0"}[24h])) by (domain_fqd
     scrape_interval: 5m
 ```
 
-## Getting Started
+## Running dmarc_srg_exporter via docker
+
+```
+docker run --rm --name dmarc_srg_exporter -p 10012:10012 \
+  ghcr.io/h3po/dmarc-srg-exporter:latest \
+  your_db_host your_db_user your_db_password your_db_database
+```
+
+## Running dmarc_srg_exporter locally
 
 ### Prerequisites
 
