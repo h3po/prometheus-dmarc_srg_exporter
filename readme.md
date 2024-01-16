@@ -1,5 +1,7 @@
 # Prometheus dmarc_srg_exporter
 
+[![Build Status](https://github.com/h3po/prometheus-dmarc_srg_exporter/actions/workflows/docker-build.yml/badge.svg)](https://github.com/h3po/prometheus-dmarc_srg_exporter/actions/workflows/docker-build.yml)
+
 This is a Prometheus exporter for [dmarc-srg](https://github.com/liuch/dmarc-srg) that fetches data from the apps' database and exposes the message counters via prometheus metrics.
 
 ## Example metrics
