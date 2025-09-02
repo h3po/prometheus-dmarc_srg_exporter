@@ -1,7 +1,10 @@
-from prometheus_client import start_http_server, Counter
+from prometheus_client import start_http_server, Counter, disable_created_metrics
 import time
 import pymysql
 import argparse
+
+# hide gauge creation timestamp metrics
+disable_created_metrics()
 
 # Start a Prometheus counter metric
 dmarc_srg_reports_total = Counter(

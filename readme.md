@@ -6,7 +6,7 @@ This is a Prometheus exporter for [dmarc-srg](https://github.com/liuch/dmarc-srg
 
 ## Example metrics
 
-The only metric this exporter purposefully creates is `dmarc_srg_reports_total`. The prometheus-client library exports some other useful data such as memory usage. The `*_created` metrics are timestamps of when the counter with the specific labelset was created, they cannot be turned off (but you may exclude them from scrapes via your scrape config) - see [client_python issue #438](https://github.com/prometheus/client_python/issues/438)
+The only metric this exporter purposefully creates is `dmarc_srg_reports_total`. The prometheus-client library exports some other useful data such as memory usage.
 
 ```
 # HELP python_gc_objects_collected_total Objects collected during gc
@@ -18,11 +18,6 @@ python_gc_objects_collected_total{generation="0"} 428.0
 # TYPE dmarc_srg_reports_total counter                        
 dmarc_srg_reports_total{domain_fqdn="your.domain",record_dkim_align="2",record_spf_align="2",report_org="google.com"} 101.0
 dmarc_srg_reports_total{domain_fqdn="your.other.domain",record_dkim_align="2",record_spf_align="2",report_org="google.com"} 86.0
-[...]
-# HELP dmarc_srg_reports_created Number of messages reported to dmarc-srg                                                                        
-# TYPE dmarc_srg_reports_created gauge                    
-dmarc_srg_reports_created{domain_fqdn="your.domain",record_dkim_align="2",record_spf_align="2",report_org="google.com"} 1.7053995771044967e+09
-dmarc_srg_reports_created{domain_fqdn="your.other.domain",record_dkim_align="2",record_spf_align="2",report_org="google.com"} 1.7053995771045454e+09
 ```
 
 `dmarc_srg_reports_total` is a counter value that restarts at 0 when the exporter is restarted, which avoids having to read the entire dmarc-srg database at startup. Use promql functions that ignore counter resets, such as `increase` to query the values. For example to query for the number of messages failing SPF per day:
